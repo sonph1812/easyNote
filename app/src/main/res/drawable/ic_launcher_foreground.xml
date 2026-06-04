@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Hiệu ứng đổ bóng nhẹ cho icon trắng -->
+    <path
+        android:fillColor="#22000000"
+        android:pathData="M35,27c-2.21,0 -4,1.79 -4,4v48c0,2.21 1.79,4 4,4h40c2.21,0 4,-1.79 4,-4V43L63,27H35z" />
+
+    <!-- Biểu tượng tờ giấy Note màu trắng tinh khiết -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M34,26c-2.21,0 -4,1.79 -4,4v48c0,2.21 1.79,4 4,4h40c2.21,0 4,-1.79 4,-4V42L62,26H34zM60,44V29.5L74.5,44H60z" />
+
+    <!-- Các dòng kẻ màu xám nhẹ trên nền trắng -->
+    <path
+        android:fillColor="#F0F0F0"
+        android:pathData="M38,54h32v3H38zM38,61h32v3H38zM38,68h20v3H38z" />
+</vector>
