@@ -17,7 +17,7 @@ git clone https://github.com/sonph1812/easyNote.git
 ## Phase 2: Open and Sync ⚙️
 
 1.  **Open Android Studio**: Launch the IDE.
-2.  **Open Project**: Select **File > Open** and choose the `QuickList` folder you just cloned.
+2.  **Open Project**: Select **File > Open** and choose the `easyNote` folder you just cloned.
 3.  **Gradle Sync**: Wait for the message *"Gradle sync finished"* at the bottom of the screen.
     - *Note: Make sure you have an internet connection for the first sync.*
 
