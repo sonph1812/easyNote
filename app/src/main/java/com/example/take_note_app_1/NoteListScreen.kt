@@ -1,9 +1,13 @@
 package com.example.take_note_app_1
 
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
+import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
+import androidx.compose.foundation.lazy.staggeredgrid.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Close
@@ -13,6 +17,8 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -21,8 +27,10 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.take_note_app_1.data.Note
+import java.text.SimpleDateFormat
+import java.util.*
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun NoteListScreen(
     notes: List<Note>,
@@ -36,7 +44,7 @@ fun NoteListScreen(
 
     val filteredNotes = remember(notes, searchQuery) {
         if (searchQuery.isBlank()) {
-            notes
+            notes.sortedByDescending { it.timestamp }
         } else {
             notes.filter {
                 it.title.contains(searchQuery, ignoreCase = true) ||
@@ -47,29 +55,66 @@ fun NoteListScreen(
 
     Scaffold(
         topBar = {
-            if (isSearchActive) {
-                SearchAppBar(
-                    query = searchQuery,
-                    onQueryChange = { searchQuery = it },
-                    onCloseClick = {
-                        isSearchActive = false
-                        searchQuery = ""
-                    }
-                )
-            } else {
-                TopAppBar(
-                    title = { Text("Easy Note") },
-                    actions = {
-                        IconButton(onClick = { isSearchActive = true }) {
-                            Icon(Icons.Default.Search, contentDescription = "Search")
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(
+                        Brush.verticalGradient(
+                            colors = listOf(
+                                MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
+                                Color.Transparent
+                            )
+                        )
+                    )
+            ) {
+                if (isSearchActive) {
+                    SearchAppBar(
+                        query = searchQuery,
+                        onQueryChange = { searchQuery = it },
+                        onCloseClick = {
+                            isSearchActive = false
+                            searchQuery = ""
                         }
-                    }
-                )
+                    )
+                } else {
+                    CenterAlignedTopAppBar(
+                        title = {
+                            Text(
+                                "Easy Note",
+                                style = MaterialTheme.typography.headlineMedium.copy(
+                                    fontWeight = FontWeight.ExtraBold,
+                                    color = MaterialTheme.colorScheme.primary
+                                )
+                            )
+                        },
+                        actions = {
+                            IconButton(onClick = { isSearchActive = true }) {
+                                Icon(
+                                    Icons.Default.Search,
+                                    contentDescription = "Search",
+                                    tint = MaterialTheme.colorScheme.primary
+                                )
+                            }
+                        },
+                        colors = TopAppBarDefaults.topAppBarColors(
+                            containerColor = Color.Transparent
+                        )
+                    )
+                }
             }
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = onAddNoteClick) {
-                Icon(Icons.Default.Add, contentDescription = "Add Note")
+            LargeFloatingActionButton(
+                onClick = onAddNoteClick,
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.onPrimary,
+                shape = RoundedCornerShape(20.dp)
+            ) {
+                Icon(
+                    Icons.Default.Add,
+                    contentDescription = "Add Note",
+                    modifier = Modifier.size(32.dp)
+                )
             }
         }
     ) { padding ->
@@ -84,12 +129,14 @@ fun NoteListScreen(
                     modifier = Modifier.align(Alignment.Center)
                 )
             } else {
-                LazyColumn(
+                LazyVerticalStaggeredGrid(
+                    columns = StaggeredGridCells.Fixed(2),
                     modifier = Modifier.fillMaxSize(),
                     contentPadding = PaddingValues(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    verticalItemSpacing = 12.dp
                 ) {
-                    items(filteredNotes) { note ->
+                    items(filteredNotes, key = { it.id }) { note ->
                         NoteItem(
                             note = note,
                             onClick = { onNoteClick(note) },
@@ -138,7 +185,7 @@ fun SearchAppBar(
             TextField(
                 value = query,
                 onValueChange = onQueryChange,
-                placeholder = { Text("Search notes...", color = MaterialTheme.colorScheme.onSurfaceVariant) },
+                placeholder = { Text("Search your notes...", color = MaterialTheme.colorScheme.onSurfaceVariant) },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
                 colors = TextFieldDefaults.colors(
@@ -154,7 +201,10 @@ fun SearchAppBar(
             IconButton(onClick = onCloseClick) {
                 Icon(Icons.Default.Close, contentDescription = "Close Search")
             }
-        }
+        },
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = Color.Transparent
+        )
     )
 }
 
@@ -168,22 +218,29 @@ fun EmptyNotesState(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
+        Surface(
+            modifier = Modifier.size(120.dp),
+            shape = RoundedCornerShape(30.dp),
+            color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
+        ) {
+            Box(contentAlignment = Alignment.Center) {
+                Text(
+                    text = if (isSearch) "🔍" else "📝",
+                    style = MaterialTheme.typography.displayMedium
+                )
+            }
+        }
+        Spacer(modifier = Modifier.height(24.dp))
         Text(
-            text = if (isSearch) "🔍" else "📝",
-            style = MaterialTheme.typography.displayLarge,
-            color = MaterialTheme.colorScheme.primary
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-        Text(
-            text = if (isSearch) "No notes match your search" else "Your notepad is empty",
+            text = if (isSearch) "No results found" else "Stay Organized",
             style = MaterialTheme.typography.headlineSmall,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = if (isSearch) "Try a different keyword" else "Tap the + button to create your first note!",
-            style = MaterialTheme.typography.bodyMedium,
+            text = if (isSearch) "We couldn't find what you're looking for." else "Start your journey by creating your first note today!",
+            style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center
         )
@@ -196,37 +253,70 @@ fun NoteItem(
     onClick: () -> Unit,
     onDeleteClick: () -> Unit
 ) {
+    val dateString = remember(note.timestamp) {
+        val sdf = SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH)
+        sdf.format(Date(note.timestamp))
+    }
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
+            .clip(RoundedCornerShape(16.dp))
             .clickable(onClick = onClick),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surface,
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
-        Row(
+        Column(
             modifier = Modifier
                 .padding(16.dp)
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
+                .fillMaxWidth()
         ) {
-            Column(modifier = Modifier.weight(1f)) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.Top
+            ) {
                 Text(
                     text = note.title,
-                    style = MaterialTheme.typography.titleMedium,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
-                Spacer(modifier = Modifier.height(4.dp))
-                Text(
-                    text = note.content,
-                    style = MaterialTheme.typography.bodyMedium,
+                    style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
                     maxLines = 2,
-                    overflow = TextOverflow.Ellipsis
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.weight(1f)
                 )
+                IconButton(
+                    onClick = onDeleteClick,
+                    modifier = Modifier.size(24.dp)
+                ) {
+                    Icon(
+                        Icons.Default.Delete,
+                        contentDescription = "Delete",
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
+                        modifier = Modifier.size(18.dp)
+                    )
+                }
             }
-            IconButton(onClick = onDeleteClick) {
-                Icon(Icons.Default.Delete, contentDescription = "Delete Note")
-            }
+            
+            Spacer(modifier = Modifier.height(8.dp))
+            
+            Text(
+                text = note.content,
+                style = MaterialTheme.typography.bodyMedium,
+                maxLines = 10,
+                overflow = TextOverflow.Ellipsis,
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f)
+            )
+            
+            Spacer(modifier = Modifier.height(12.dp))
+            
+            Text(
+                text = dateString,
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.primary,
+                fontWeight = FontWeight.Medium
+            )
         }
     }
 }
@@ -250,9 +340,9 @@ fun NoteListScreenWrapper(
 @Composable
 fun NoteListPreview() {
     val sampleNotes = listOf(
-        Note(id = 1, title = "Học Android", content = "Học Jetpack Compose và Room Database"),
-        Note(id = 2, title = "Đi chợ", content = "Mua rau, thịt, trứng"),
-        Note(id = 3, title = "Ghi chú quan trọng", content = "Đừng quên deadline dự án")
+        Note(id = 1, title = "Learn Android", content = "Master Jetpack Compose and Room Database"),
+        Note(id = 2, title = "Grocery Shopping", content = "Buy vegetables, meat, and eggs"),
+        Note(id = 3, title = "Important Note", content = "Don't forget the project deadline")
     )
     MaterialTheme {
         NoteListScreen(

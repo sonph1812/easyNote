@@ -1,6 +1,8 @@
 package com.example.take_note_app_1
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
@@ -8,9 +10,14 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import kotlinx.coroutines.launch
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.take_note_app_1.data.Note
+import java.text.SimpleDateFormat
+import java.util.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -24,35 +31,61 @@ fun AddEditNoteScreen(
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
 
+    val dateString = remember {
+        val sdf = SimpleDateFormat("MMM dd, yyyy • HH:mm", Locale.ENGLISH)
+        sdf.format(Date(note?.timestamp ?: System.currentTimeMillis()))
+    }
+
     Scaffold(
         snackbarHost = { SnackbarHost(snackbarHostState) },
         topBar = {
             TopAppBar(
-                title = { Text(if (note == null) "Add Note" else "Edit Note") },
+                title = { },
                 navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                    IconButton(
+                        onClick = onBack,
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .background(
+                                color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
+                                shape = RoundedCornerShape(12.dp)
+                            )
+                    ) {
+                        Icon(
+                            Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = "Back",
+                            tint = MaterialTheme.colorScheme.onSurface
+                        )
                     }
                 },
                 actions = {
-                    IconButton(
+                    Button(
                         onClick = {
-                            if (title.isBlank()) {
+                            if (title.isBlank() && content.isBlank()) {
+                                onBack()
+                            } else if (title.isBlank()) {
                                 scope.launch {
-                                    snackbarHostState.showSnackbar("Title cannot be empty")
-                                }
-                            } else if (content.isBlank()) {
-                                scope.launch {
-                                    snackbarHostState.showSnackbar("Content cannot be empty")
+                                    snackbarHostState.showSnackbar("Please add a title")
                                 }
                             } else {
                                 onSave(title, content)
                             }
-                        }
+                        },
+                        modifier = Modifier.padding(end = 16.dp),
+                        shape = RoundedCornerShape(12.dp),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = MaterialTheme.colorScheme.primary,
+                            contentColor = MaterialTheme.colorScheme.onPrimary
+                        )
                     ) {
-                        Icon(Icons.Default.Check, contentDescription = "Save Note")
+                        Icon(Icons.Default.Check, contentDescription = null, modifier = Modifier.size(18.dp))
+                        Spacer(Modifier.width(8.dp))
+                        Text("Save", fontWeight = FontWeight.Bold)
                     }
-                }
+                },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = Color.Transparent
+                )
             )
         }
     ) { padding ->
@@ -60,22 +93,67 @@ fun AddEditNoteScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
-                .padding(16.dp)
+                .padding(horizontal = 24.dp)
         ) {
-            OutlinedTextField(
+            Text(
+                text = dateString,
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
+                modifier = Modifier.padding(vertical = 8.dp)
+            )
+
+            TextField(
                 value = title,
                 onValueChange = { title = it },
-                label = { Text("Title") },
-                modifier = Modifier.fillMaxWidth()
+                placeholder = {
+                    Text(
+                        "Note Title",
+                        style = MaterialTheme.typography.headlineMedium.copy(
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.4f)
+                        )
+                    )
+                },
+                modifier = Modifier.fillMaxWidth(),
+                textStyle = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold),
+                colors = TextFieldDefaults.colors(
+                    focusedContainerColor = Color.Transparent,
+                    unfocusedContainerColor = Color.Transparent,
+                    disabledContainerColor = Color.Transparent,
+                    focusedIndicatorColor = Color.Transparent,
+                    unfocusedIndicatorColor = Color.Transparent
+                ),
+                singleLine = true
             )
-            Spacer(modifier = Modifier.height(16.dp))
-            OutlinedTextField(
+
+            HorizontalDivider(
+                modifier = Modifier.padding(vertical = 8.dp),
+                thickness = 0.5.dp,
+                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.1f)
+            )
+
+            TextField(
                 value = content,
                 onValueChange = { content = it },
-                label = { Text("Content") },
+                placeholder = {
+                    Text(
+                        "Start typing...",
+                        style = MaterialTheme.typography.bodyLarge.copy(
+                            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.4f)
+                        )
+                    )
+                },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .weight(1f)
+                    .weight(1f),
+                textStyle = MaterialTheme.typography.bodyLarge.copy(lineHeight = 24.sp),
+                colors = TextFieldDefaults.colors(
+                    focusedContainerColor = Color.Transparent,
+                    unfocusedContainerColor = Color.Transparent,
+                    disabledContainerColor = Color.Transparent,
+                    focusedIndicatorColor = Color.Transparent,
+                    unfocusedIndicatorColor = Color.Transparent
+                )
             )
         }
     }
@@ -94,7 +172,7 @@ fun AddNotePreview() {
 fun EditNotePreview() {
     MaterialTheme {
         AddEditNoteScreen(
-            note = Note(title = "Ghi chú mẫu", content = "Nội dung ghi chú ở đây"),
+            note = Note(title = "Sample Note", content = "Note content goes here"),
             onSave = { _, _ -> },
             onBack = {}
         )
