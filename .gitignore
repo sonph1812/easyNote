@@ -17,3 +17,6 @@ local.properties
 # Documentation
 *.md
 !README.md
+
+# Agent Instructions
+.codex/
