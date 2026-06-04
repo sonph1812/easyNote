@@ -1,4 +1,4 @@
-# Quick Start Guide: How to Run QuickList 🚀
+# Quick Start Guide: How to Run  🚀
 
 Follow these 3 simple phases to get the app running on your Android Studio or Physical Device.
 
@@ -9,7 +9,7 @@ Follow these 3 simple phases to get the app running on your Android Studio or Ph
 Open your terminal (or Command Prompt) and run the following command to download the source code:
 
 ```bash
-git clone https://github.com/sonph1812/QuickList.git
+git clone https://github.com/sonph1812/easyNote.git
 ```
 
 ---
