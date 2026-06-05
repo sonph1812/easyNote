@@ -1,4 +1,4 @@
-# Quick Start Guide: How to Run QuickList 🚀
+# Quick Start Guide: How to Run  🚀
 
 Follow these 3 simple phases to get the app running on your Android Studio or Physical Device.
 
@@ -9,7 +9,7 @@ Follow these 3 simple phases to get the app running on your Android Studio or Ph
 Open your terminal (or Command Prompt) and run the following command to download the source code:
 
 ```bash
-git clone https://github.com/sonph1812/QuickList.git
+git clone https://github.com/sonph1812/easyNote.git
 ```
 
 ---
@@ -17,7 +17,7 @@ git clone https://github.com/sonph1812/QuickList.git
 ## Phase 2: Open and Sync ⚙️
 
 1.  **Open Android Studio**: Launch the IDE.
-2.  **Open Project**: Select **File > Open** and choose the `QuickList` folder you just cloned.
+2.  **Open Project**: Select **File > Open** and choose the `easyNote` folder you just cloned.
 3.  **Gradle Sync**: Wait for the message *"Gradle sync finished"* at the bottom of the screen.
     - *Note: Make sure you have an internet connection for the first sync.*
 
