@@ -8,33 +8,33 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
+import androidx.compose.ui.platform.LocalView
 
 private val DarkColorScheme = darkColorScheme(
-    primary = GoldPrimaryDark,
+    primary = BluePrimaryDark,
     onPrimary = Color.Black,
-    secondary = GoldLight,
+    secondary = BlueLight,
     onSecondary = Color.Black,
     background = BackgroundDark,
     surface = SurfaceDark,
     onBackground = Color.White,
     onSurface = Color.White,
-    primaryContainer = GoldDark,
+    primaryContainer = BlueDark,
     onPrimaryContainer = Color.White
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = GoldPrimary,
-    onPrimary = Color.Black,
-    secondary = GoldLight,
+    primary = BluePrimary,
+    onPrimary = Color.White,
+    secondary = BlueLight,
     onSecondary = Color.Black,
     background = PremiumWhite,
     surface = SurfaceLight,
     onBackground = TextDark,
     onSurface = TextDark,
-    primaryContainer = GoldLight.copy(alpha = 0.3f),
-    onPrimaryContainer = GoldDark
+    primaryContainer = BlueLight.copy(alpha = 0.3f),
+    onPrimaryContainer = BlueDark
 )
 
 @Composable
@@ -47,8 +47,8 @@ fun Takenoteapp1Theme(
     val view = LocalView.current
     if (!view.isInEditMode) {
         val window = (view.context as Activity).window
-        window.statusBarColor = colorScheme.background.toArgb()
-        WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
+        window.statusBarColor = colorScheme.primary.toArgb()
+        WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = false
     }
 
     MaterialTheme(

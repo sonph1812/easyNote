@@ -8,17 +8,16 @@
     <path android:pathData="M0,0h108v108h-108z">
         <aapt:attr name="android:fillColor">
             <gradient
-                android:endX="108"
+                android:endX="54"
                 android:endY="108"
-                android:startX="0"
+                android:startX="54"
                 android:startY="0"
                 android:type="linear">
-                <!-- Màu vàng Gold sang trọng -->
                 <item
-                    android:color="#FFD700"
+                    android:color="#6CB8EE"
                     android:offset="0.0" />
                 <item
-                    android:color="#B8860B"
+                    android:color="#3D85D2"
                     android:offset="1.0" />
             </gradient>
         </aapt:attr>

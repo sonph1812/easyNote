@@ -4,18 +4,30 @@
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
-    <!-- Hiệu ứng đổ bóng nhẹ cho icon trắng -->
-    <path
-        android:fillColor="#22000000"
-        android:pathData="M35,27c-2.21,0 -4,1.79 -4,4v48c0,2.21 1.79,4 4,4h40c2.21,0 4,-1.79 4,-4V43L63,27H35z" />
 
-    <!-- Biểu tượng tờ giấy Note màu trắng tinh khiết -->
+    <!-- Open Book Shape -->
     <path
         android:fillColor="#FFFFFF"
-        android:pathData="M34,26c-2.21,0 -4,1.79 -4,4v48c0,2.21 1.79,4 4,4h40c2.21,0 4,-1.79 4,-4V42L62,26H34zM60,44V29.5L74.5,44H60z" />
+        android:pathData="M25,35c0,-4 3,-7 7,-7h18c2,0 4,1 4,4v36c0,-3 2,-4 4,-4h18c4,0 7,3 7,7v5c0,-4 -3,-7 -7,-7h-18c-2,0 -4,1 -4,4v-36c0,3 -2,4 -4,4h-18c-4,0 -7,-3 -7,-7z"
+        android:strokeWidth="2"
+        android:strokeColor="#FFFFFF"/>
 
-    <!-- Các dòng kẻ màu xám nhẹ trên nền trắng -->
     <path
-        android:fillColor="#F0F0F0"
-        android:pathData="M38,54h32v3H38zM38,61h32v3H38zM38,68h20v3H38z" />
+        android:fillColor="#FFFFFF"
+        android:pathData="M25,40v35c0,4 3,7 7,7h18c2,0 4,-1 4,-4c0,3 2,4 4,4h18c4,0 7,-3 7,-7v-35c0,4 -3,7 -7,7h-18c-2,0 -4,-1 -4,-4c0,3 -2,-4 -4,-4h-18c-4,0 -7,3 -7,7z"/>
+
+    <!-- Left page checkmark -->
+    <path
+        android:fillColor="#A0D8FF"
+        android:pathData="M32,58l5,5l10,-10l-2,-2l-8,8l-3,-3z"/>
+
+    <!-- Right page pencil icon -->
+    <path
+        android:fillColor="#A0D8FF"
+        android:pathData="M65,45l12,-12l4,4l-12,12z M78,35l3,3 M64,46l-2,5l5,-2z"/>
+
+    <!-- Bottom Text "EASY NOTE" (Simplified as paths) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M25,85h5v2h-3v2h3v2h-3v2h3v2h-5z M33,85h2l3,10h-2l-1,-3h-3l-1,3h-2z M41,85h5v2h-3v2h3v2h-3v7h-2z M50,85l3,5l3,-5h2l-4,7v3h-2v-3l-4,-7z" />
 </vector>
