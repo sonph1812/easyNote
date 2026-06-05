@@ -5,26 +5,34 @@
     android:viewportWidth="108"
     android:viewportHeight="108">
 
-    <!-- White Book Icon -->
-    <path
-        android:fillColor="#FFFFFF"
-        android:pathData="M24,30c0,-3 3,-6 6,-6h18c2,0 4,1 4,4v36c0,-3 2,-4 4,-4h18c3,0 6,3 6,6v8c0,-3 -3,-6 -6,-6h-18c-2,0 -4,1 -4,4v-36c0,3 -2,4 -4,4h-18c-3,0 -6,-3 -6,-6z" />
-    <path
-        android:fillColor="#FFFFFF"
-        android:pathData="M24,36v32c0,3 3,6 6,6h18c2,0 4,-1 4,-4c0,3 2,4 4,4h18c3,0 6,-3 6,-6v-32c0,3 -3,6 -6,6h-18c-2,0 -4,-1 -4,-4c0,3 -2,1 -4,1h-18c-3,0 -6,3 -6,6z" />
+    <!-- Reduced scale to 0.85 to ensure the icon fits perfectly within the safe zone -->
+    <group
+        android:scaleX="0.85"
+        android:scaleY="0.85"
+        android:pivotX="54"
+        android:pivotY="54">
 
-    <!-- Checkmark on left page -->
-    <path
-        android:fillColor="#A0D8FF"
-        android:pathData="M32,50l4,4l8,-8l-2,-2l-6,6l-2,-2z" />
+        <!-- White Book Icon -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M24,30c0,-3 3,-6 6,-6h18c2,0 4,1 4,4v36c0,-3 2,-4 4,-4h18c3,0 6,3 6,6v8c0,-3 -3,-6 -6,-6h-18c-2,0 -4,1 -4,4v-36c0,3 -2,4 -4,4h-18c-3,0 -6,-3 -6,-6z" />
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M24,36v32c0,3 3,6 6,6h18c2,0 4,-1 4,-4c0,3 2,4 4,4h18c3,0 6,-3 6,-6v-32c0,3 -3,6 -6,6h-18c-2,0 -4,-1 -4,-4c0,3 -2,1 -4,1h-18c-3,0 -6,3 -6,6z" />
 
-    <!-- Pencil on right page -->
-    <path
-        android:fillColor="#A0D8FF"
-        android:pathData="M64,40l10,-10l4,4l-10,10z M74,30l2,2 M63,41l-2,4l4,-2z" />
+        <!-- Checkmark on left page -->
+        <path
+            android:fillColor="#A0D8FF"
+            android:pathData="M32,50l4,4l8,-8l-2,-2l-6,6l-2,-2z" />
 
-    <!-- Simplified EASYNOTE text -->
-    <path
-        android:fillColor="#FFFFFF"
-        android:pathData="M22,82h3v1h-2v1h2v1h-2v1h2v1h-3z M27,82h1.5l1.5,5h-1l-0.5,-2h-1.5l-0.5,2h-1z M32,82h3v1h-2v1h2v1h-2v4h-1z M37,82l2,3l2,-3h1l-2.5,4v3h-1v-3l-2.5,-4z M45,82l1.5,3l1.5,-3h1v7h-1v-5l-1.5,3l-1.5,-3v5h-1v-7z M52,82c1,0 1.5,1 1.5,1.5s-0.5,1.5 -1.5,1.5s-1.5,-1 -1.5,-1.5s0.5,-1.5 1.5,-1.5z M57,82h1l3,5h-1v-5h-3z M63,82h3v1h-2v2h2v1h-2v2h2v1h-3z" />
+        <!-- Pencil on right page -->
+        <path
+            android:fillColor="#A0D8FF"
+            android:pathData="M64,40l10,-10l4,4l-10,10z M74,30l2,2 M63,41l-2,4l4,-2z" />
+
+        <!-- Simplified EASYNOTE text -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M22,82h3v1h-2v1h2v1h-2v1h2v1h-3z M27,82h1.5l1.5,5h-1l-0.5,-2h-1.5l-0.5,2h-1z M32,82h3v1h-2v1h2v1h-2v4h-1z M37,82l2,3l2,-3h1l-2.5,4v3h-1v-3l-2.5,-4z M45,82l1.5,3l1.5,-3h1v7h-1v-5l-1.5,3l-1.5,-3v5h-1v-7z M52,82c1,0 1.5,1 1.5,1.5s-0.5,1.5 -1.5,1.5s-1.5,-1 -1.5,-1.5s0.5,-1.5 1.5,-1.5z M57,82h1l3,5h-1v-5h-3z M63,82h3v1h-2v2h2v1h-2v2h2v1h-3z" />
+    </group>
 </vector>
