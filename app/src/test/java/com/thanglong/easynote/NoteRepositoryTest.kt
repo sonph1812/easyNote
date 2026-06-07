@@ -1,8 +1,8 @@
-package com.example.take_note_app_1
+package com.thanglong.easynote
 
-import com.example.take_note_app_1.data.Note
-import com.example.take_note_app_1.data.NoteDao
-import com.example.take_note_app_1.data.NoteRepository
+import com.thanglong.easynote.data.Note
+import com.thanglong.easynote.data.NoteDao
+import com.thanglong.easynote.data.NoteRepository
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.every

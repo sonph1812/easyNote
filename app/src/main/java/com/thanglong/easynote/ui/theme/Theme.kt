@@ -1,4 +1,4 @@
-package com.example.take_note_app_1.ui.theme
+package com.thanglong.easynote.ui.theme
 
 import android.app.Activity
 import androidx.compose.foundation.isSystemInDarkTheme

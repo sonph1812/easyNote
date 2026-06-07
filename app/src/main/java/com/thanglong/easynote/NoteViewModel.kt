@@ -1,11 +1,11 @@
-package com.example.take_note_app_1
+package com.thanglong.easynote
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.take_note_app_1.data.Note
-import com.example.take_note_app_1.data.NoteDatabase
-import com.example.take_note_app_1.data.NoteRepository
+import com.thanglong.easynote.data.Note
+import com.thanglong.easynote.data.NoteDatabase
+import com.thanglong.easynote.data.NoteRepository
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn

@@ -1,4 +1,4 @@
-package com.example.take_note_app_1
+package com.thanglong.easynote
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -15,7 +15,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.take_note_app_1.data.Note
+import com.thanglong.easynote.data.Note
 import java.text.SimpleDateFormat
 import java.util.*
 

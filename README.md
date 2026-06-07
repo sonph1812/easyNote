@@ -6,7 +6,7 @@ Below is the information you need for your app store listing and project documen
 
 ## 📦 App Information
 
-- **App Package Name:** `com.example.take_note_app_1`
+- **App Package Name:** `com.thanglong.easynote`
 - **Current Version:** `1.0.0`
 - **Minimum SDK:** `24` (Android 7.0)
 - **Target SDK:** `36` (Android 15)

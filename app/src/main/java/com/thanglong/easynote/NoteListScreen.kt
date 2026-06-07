@@ -1,4 +1,4 @@
-package com.example.take_note_app_1
+package com.thanglong.easynote
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -26,7 +26,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.take_note_app_1.data.Note
+import com.thanglong.easynote.data.Note
 import java.text.SimpleDateFormat
 import java.util.*
 

@@ -1,4 +1,4 @@
-package com.example.take_note_app_1
+package com.thanglong.easynote
 
 import org.junit.Test
 

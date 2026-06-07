@@ -1,12 +1,12 @@
-package com.example.take_note_app_1
+package com.thanglong.easynote
 
 import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.example.take_note_app_1.data.Note
-import com.example.take_note_app_1.data.NoteDao
-import com.example.take_note_app_1.data.NoteDatabase
+import com.thanglong.easynote.data.Note
+import com.thanglong.easynote.data.NoteDao
+import com.thanglong.easynote.data.NoteDatabase
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.After

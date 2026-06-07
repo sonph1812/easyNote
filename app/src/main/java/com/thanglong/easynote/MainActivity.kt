@@ -1,4 +1,4 @@
-package com.example.take_note_app_1
+package com.thanglong.easynote
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -9,8 +9,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.compose.runtime.*
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.take_note_app_1.data.Note
-import com.example.take_note_app_1.ui.theme.Takenoteapp1Theme
+import com.thanglong.easynote.data.Note
+import com.thanglong.easynote.ui.theme.Takenoteapp1Theme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

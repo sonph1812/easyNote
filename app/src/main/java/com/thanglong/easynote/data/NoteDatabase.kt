@@ -1,4 +1,4 @@
-package com.example.take_note_app_1.data
+package com.thanglong.easynote.data
 
 import android.content.Context
 import androidx.room.Database

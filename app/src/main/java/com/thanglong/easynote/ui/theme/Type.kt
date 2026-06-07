@@ -1,4 +1,4 @@
-package com.example.take_note_app_1.ui.theme
+package com.thanglong.easynote.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
